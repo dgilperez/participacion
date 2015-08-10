@@ -43,4 +43,7 @@ class ApplicationController < ActionController::Base
     verify_recaptcha(model: resource)
   end
 
+  def set_voted_values(debates_ids)
+    @voted_values = current_user ? current_user.votes_on_debates(debates_ids) : {}
+  end
 end
