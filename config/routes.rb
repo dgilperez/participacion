@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     resources :comments, only: :create, shallow: true do
       member do
         post :vote
+        put :hide
+        put :restore
       end
     end
   end

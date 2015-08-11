@@ -1,6 +1,8 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :build_comment, only: :create
+  before_action :load_hidden_comment, only: :restore
+
   load_and_authorize_resource
   respond_to :html, :js
 
@@ -17,6 +19,15 @@ class CommentsController < ApplicationController
   def vote
     @comment.vote_by(voter: current_user, vote: params[:value])
     respond_with @comment
+  end
+
+  def hide
+    @comment = Comment.find(params[:id])
+    @comment.hide
+  end
+
+  def restore
+    @comment.restore
   end
 
   private
@@ -46,5 +57,9 @@ class CommentsController < ApplicationController
 
     def email_on_comment_reply?
       reply? && parent.author.email_on_comment_reply?
+    end
+
+    def load_hidden_comment
+      @comment = Comment.with_hidden.find(params[:id])
     end
 end

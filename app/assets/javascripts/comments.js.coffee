@@ -16,5 +16,3 @@ App.Comments =
       id = $(this).data().id
       App.Comments.toggle_form(id)
       false
-
-

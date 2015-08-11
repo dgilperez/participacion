@@ -1,5 +1,5 @@
 <div class="row">
-  <div id="comment-<%= comment.id %>" class="comment small-12 column">
+	<div id="<%= dom_id(comment) %>" class="comment small-12 column <%= css_for_hidden(comment) %>">
 
     <%= image_tag('user_default_2.jpg', class: 'user-photo left', size: '32x32') %>
 
@@ -21,8 +21,19 @@
       <% end %>
     </div>
 
+    <% if moderator? %>
+      <div id='moderator-comment-actions'>
+        <%= render 'comments/actions', comment: comment %>
+      </div>
+    <% end %>
+
     <div class="comment-children">
-      <%= render comment.children %>
+      <% if moderator? %>
+        <% children = comment.children.with_deleted %>
+      <% else %>
+        <% children = comment.children %>
+      <% end %>
+      <%= render children %>
     </div>
 
   </div>

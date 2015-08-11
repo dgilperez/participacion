@@ -16,6 +16,7 @@ class Ability
       can [:create, :vote], Comment
 
       if user.moderator? or user.administrator?
+        can [:hide, :restore], Comment
 
       elsif user.administrator?
 

@@ -15,6 +15,11 @@ class DebatesController < ApplicationController
 
   def show
     set_voted_values [@debate.id]
+    if current_user.try(:moderator?)
+      @comments = @debate.root_comments.with_hidden
+    else
+      @comments = @debate.root_comments
+    end
   end
 
   def new

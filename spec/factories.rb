@@ -25,6 +25,10 @@ FactoryGirl.define do
     commentable
     user
     body 'Comment body'
+
+    trait :hidden do
+      hidden_at Time.now
+    end
   end
 
   factory :commentable do

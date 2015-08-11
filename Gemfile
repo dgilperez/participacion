@@ -30,6 +30,7 @@ gem 'simple_captcha2', require: 'simple_captcha'
 gem 'ckeditor'
 gem 'cancancan'
 gem 'social-share-button'
+gem 'paranoia'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

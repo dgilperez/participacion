@@ -1,0 +1,5 @@
+<% if comment.viewable? %>
+  <%= link_to "Hide", hide_comment_path(comment), method: :put, remote: true %>
+<% elsif comment.hidden? %>
+  <%= link_to "Allow", restore_comment_path(comment), method: :put, remote: true %>
+<% end %>
